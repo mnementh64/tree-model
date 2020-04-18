@@ -37,6 +37,10 @@ public class ModelExporter {
         Branch subBranch1 = new Branch(60, vecSubBranch1, 2);
         branch1.addBranch(subBranch1);
 
+        Vector vecBranch2 = new Vector(-30, 30);
+        Branch branch2 = new Branch(80, vecBranch2, 3);
+        trunk.addBranch(branch2);
+
         Tree tree = new Tree(trunk);
 
         exporter.exportToStdOutput(tree);

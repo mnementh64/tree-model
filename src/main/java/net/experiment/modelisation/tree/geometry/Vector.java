@@ -11,4 +11,16 @@ public class Vector {
         this.x = x;
         this.y = y;
     }
+
+    public Vector scale(double percentage) {
+        return new Vector(this.x * percentage, this.y * percentage);
+    }
+
+    @Override
+    public String toString() {
+        return "Vector{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

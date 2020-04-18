@@ -3,6 +3,7 @@ package net.experiment.modelisation.tree;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import net.experiment.modelisation.tree.geometry.Point;
+import net.experiment.modelisation.tree.model.Branch;
 import net.experiment.modelisation.tree.model.Tree;
 
 public class TreeRenderer {
@@ -23,12 +24,14 @@ public class TreeRenderer {
         gc.strokeLine(width / 2, 0, width / 2, height);
         gc.strokeLine(0, height / 2, width, height / 2);
 
-        gc.setStroke(Color.BLACK);
-//        gc.setLineWidth(1);
+        gc.setStroke(Color.BROWN);
 
-        //        Point origin = new Point(width / 2, height);
+        // resolve the real positions of all branches of the tree - the trunk starts from the origin.
         Point origin = new Point(width / 2, height);
-//        drawFrom(gc, tree.getInitialSegment(), origin, 0);
+        tree.resolvePositions(origin);
+        tree.displayPositions();
+
+        drawBranch(gc, tree.getTrunk());
 
 //        gc.setFill(Color.GREEN);
 //        gc.setStroke(Color.BLUE);
@@ -50,6 +53,15 @@ public class TreeRenderer {
 //                new double[]{210, 210, 240, 240}, 4);
 //        gc.strokePolyline(new double[]{110, 140, 110, 140},
 //                new double[]{210, 210, 240, 240}, 4);
+    }
+
+    private void drawBranch(GraphicsContext gc, Branch branch) {
+        gc.setLineWidth(branch.getSection());
+        Point a = branch.getRealSegment().a;
+        Point b = branch.getRealSegment().b;
+        gc.strokeLine(a.x, height - (a.y - height), b.x, height - (b.y - height));
+
+        branch.streamOfBranches().forEach(br -> drawBranch(gc, br));
     }
 
     /**
