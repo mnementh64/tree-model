@@ -1,39 +1,33 @@
 package net.experiment.modelisation.tree.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.experiment.modelisation.tree.geometry.Vector;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Branch {
     @JsonProperty
-    /**
-     * distance of the branch starting point relative to the beginning of the attached branch
-     */
-    private int positionOnSegment;
-    /**
-     * angle in radians relative to the attached branch.
-     */
+    private int attachedPosition;
     @JsonProperty
-    private double orientation;
+    private Vector vector;
     @JsonProperty
-    private Segment segment;
+    private int section;
+    @JsonProperty
+    private List<Branch> branches = new ArrayList<>();
+    @JsonProperty
+    private Branch extension;
 
     public Branch() {
     }
 
-    public Branch(int positionOnSegment, double orientation, Segment segment) {
-        this.positionOnSegment = positionOnSegment;
-        this.orientation = orientation;
-        this.segment = segment;
+    public Branch(int attachedPosition, Vector vector, int section) {
+        this.attachedPosition = attachedPosition;
+        this.vector = vector;
+        this.section = section;
     }
 
-    public Segment getSegment() {
-        return segment;
-    }
-
-    public double getOrientation() {
-        return orientation;
-    }
-
-    public int getPositionOnSegment() {
-        return positionOnSegment;
+    public void addBranch(Branch branch) {
+        this.branches.add(branch);
     }
 }

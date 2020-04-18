@@ -2,9 +2,7 @@ package net.experiment.modelisation.tree;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import net.experiment.modelisation.tree.geometry.GeometryUtils;
 import net.experiment.modelisation.tree.geometry.Point;
-import net.experiment.modelisation.tree.model.Segment;
 import net.experiment.modelisation.tree.model.Tree;
 
 public class TreeRenderer {
@@ -30,7 +28,7 @@ public class TreeRenderer {
 
         //        Point origin = new Point(width / 2, height);
         Point origin = new Point(width / 2, height);
-        drawFrom(gc, tree.getInitialSegment(), origin, 0);
+//        drawFrom(gc, tree.getInitialSegment(), origin, 0);
 
 //        gc.setFill(Color.GREEN);
 //        gc.setStroke(Color.BLUE);
@@ -63,19 +61,19 @@ public class TreeRenderer {
      * |   |
      * A-O-B
      */
-    private void drawFrom(GraphicsContext gc, Segment segment, Point origin, double orientation) {
-        float[] transformedVertices = GeometryUtils.rotateSegment(segment, origin, orientation);
-
-        double[] transformedX = new double[transformedVertices.length / 2];
-        double[] transformedY = new double[transformedVertices.length / 2];
-        for (int i = 0; i < transformedVertices.length; i += 2) {
-            transformedX[i / 2] = transformedVertices[i];
-            transformedY[i / 2] = transformedVertices[i + 1] - segment.getLength();
-        }
-        gc.fillPolygon(transformedX, transformedY, 4);
-
-//        segment.streamOfBranches().forEach(branch -> {
-//            Point positionOnSegment = GeometryUtils.computePositionObranch.getPositionOnSegment()
-//        });
-    }
+//    private void drawFrom(GraphicsContext gc, Segment segment, Point origin, double orientation) {
+//        float[] transformedVertices = GeometryUtils.rotateSegment(segment, origin, orientation);
+//
+//        double[] transformedX = new double[transformedVertices.length / 2];
+//        double[] transformedY = new double[transformedVertices.length / 2];
+//        for (int i = 0; i < transformedVertices.length; i += 2) {
+//            transformedX[i / 2] = transformedVertices[i];
+//            transformedY[i / 2] = transformedVertices[i + 1] - segment.getLength();
+//        }
+//        gc.fillPolygon(transformedX, transformedY, 4);
+//
+////        segment.streamOfBranches().forEach(branch -> {
+////            Point positionOnSegment = GeometryUtils.computePositionObranch.getPositionOnSegment()
+////        });
+//    }
 }

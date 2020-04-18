@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Tree {
 
     @JsonProperty
-    private Segment initialSegment;
+    private Branch trunk;
 
-    public Tree() {}
-    public Tree(Segment initialSegment) {
-        this.initialSegment = initialSegment;
+    public Tree() {
     }
 
-    public Segment getInitialSegment() {
-        return initialSegment;
+    public Tree(Branch trunk) {
+        this.trunk = trunk;
     }
 }

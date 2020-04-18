@@ -20,7 +20,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException, JsonProcessingException {
-        primaryStage.setTitle("Drawing Operations Test");
+        primaryStage.setTitle("Tree growth simulation");
         Group root = new Group();
         Canvas canvas = new Canvas(1000, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
