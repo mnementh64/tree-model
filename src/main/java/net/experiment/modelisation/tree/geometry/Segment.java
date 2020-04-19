@@ -9,6 +9,11 @@ public class Segment {
         this.b = b;
     }
 
+    public void translate(Vector translation) {
+        a = a.translate(translation);
+        b = b.translate(translation);
+    }
+
     @Override
     public String toString() {
         return "Segment{" +

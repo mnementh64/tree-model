@@ -11,6 +11,6 @@ public class TreeEvolver {
 
     public void evolve() {
         // basic rule : each branch grows by 10 units
-
+        tree.getTrunk().evolve();
     }
 }

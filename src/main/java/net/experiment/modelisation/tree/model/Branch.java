@@ -70,6 +70,14 @@ public class Branch {
         }
     }
 
+    public void evolve() {
+        double growthFactor = rank == 0 ? 1.3 : rank == 1 ? 1.2 : 1.3;
+        vector = vector.scale(growthFactor);
+//        int sectionFactor = rank == 0 ? 1.3 : rank == 1 ? 1.2 : 1.3;
+
+        this.streamOfBranches().forEach(Branch::evolve);
+    }
+
     public int getAttachedAtPercent() {
         return attachedAtPercent;
     }

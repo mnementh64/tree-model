@@ -12,8 +12,8 @@ public class Vector {
         this.y = y;
     }
 
-    public Vector scale(double percentage) {
-        return new Vector(this.x * percentage, this.y * percentage);
+    public Vector scale(double factor) {
+        return new Vector(this.x * factor, this.y * factor);
     }
 
     @Override
@@ -22,5 +22,9 @@ public class Vector {
                 "x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    public Vector subtract(Vector vector) {
+        return new Vector(this.x - vector.x, this.y - vector.y);
     }
 }
