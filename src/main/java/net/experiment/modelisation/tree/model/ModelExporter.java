@@ -26,7 +26,7 @@ public class ModelExporter {
     public static void main(String[] args) throws IOException {
         ModelExporter exporter = new ModelExporter();
 
-        Vector vecTrunk = new Vector(0, 50);
+        Vector vecTrunk = new Vector(0, 40);
         Branch trunk = new Branch(0, vecTrunk, 8);
 
         Vector vecBranch1 = new Vector(30, 30);
@@ -40,6 +40,10 @@ public class ModelExporter {
         Vector vecBranch2 = new Vector(-30, 30);
         Branch branch2 = new Branch(80, vecBranch2, 3);
         trunk.addBranch(branch2);
+
+        Vector vecTrunk2 = new Vector(3, 10);
+        Branch trunk2 = new Branch(vecTrunk2, 5);
+        trunk.addExtension(trunk2);
 
         Tree tree = new Tree(trunk);
 

@@ -1,6 +1,7 @@
 package net.experiment.modelisation.tree.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.experiment.modelisation.tree.geometry.Point;
 import net.experiment.modelisation.tree.geometry.Segment;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Branch {
     @JsonProperty
     private int attachedAtPercent;
@@ -35,6 +37,11 @@ public class Branch {
     public Branch() {
     }
 
+    public Branch(Vector vector, double section) {
+        this.vector = vector;
+        this.section = section;
+    }
+
     public Branch(int attachedAtPercent, Vector vector, double section) {
         this.attachedAtPercent = attachedAtPercent;
         this.vector = vector;
@@ -51,12 +58,18 @@ public class Branch {
     }
 
     public void resolvePositionFrom(Point origin) {
-        realSegment = new Segment(new Point(origin), new Point(origin.translate(vector)));
+        Point start = new Point(origin);
+        Point end = new Point(origin.translate(vector));
+        realSegment = new Segment(start, end);
 
         // resolve positions for all branches
         for (Branch branch : branches) {
             Point attachedPoint = realSegment.a.translate(vector.scale((double) branch.getAttachedAtPercent() / 100.0));
             branch.resolvePositionFrom(attachedPoint);
+        }
+
+        if (extension != null) {
+            extension.resolvePositionFrom(end);
         }
     }
 
@@ -67,6 +80,9 @@ public class Branch {
             for (Branch branch : branches) {
                 branch.displayPositions(rank + 1);
             }
+        }
+        if (hasExtension()) {
+            extension.displayPositions(rank);
         }
     }
 
@@ -96,5 +112,19 @@ public class Branch {
 
     public int getRank() {
         return rank;
+    }
+
+    public void addExtension(Branch extension) {
+        // extensions must have the same rank as their reference branch
+        extension.setRank(this.getRank());
+        this.extension = extension;
+    }
+
+    public Branch getExtension() {
+        return extension;
+    }
+
+    public boolean hasExtension() {
+        return extension != null;
     }
 }

@@ -2,6 +2,7 @@ package net.experiment.modelisation.tree;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineCap;
 import net.experiment.modelisation.tree.geometry.Point;
 import net.experiment.modelisation.tree.model.Branch;
 import net.experiment.modelisation.tree.model.Tree;
@@ -59,12 +60,16 @@ public class TreeRenderer {
     }
 
     private void drawBranch(GraphicsContext gc, Branch branch) {
+        gc.setLineCap(StrokeLineCap.ROUND);
         gc.setLineWidth(branch.getSection());
         Point a = branch.getRealSegment().a;
         Point b = branch.getRealSegment().b;
         gc.strokeLine(a.x, height - (a.y - height), b.x, height - (b.y - height));
 
         branch.streamOfBranches().forEach(br -> drawBranch(gc, br));
+        if (branch.hasExtension()) {
+            drawBranch(gc, branch.getExtension());
+        }
     }
 
     /**

@@ -34,11 +34,6 @@ public class Main extends Application {
         final Thread taskThread = new Thread(task, "simulation");
         taskThread.setDaemon(true);
 
-//        TreeRenderer treeRenderer = new TreeRenderer(gc, tree, 600, 600);
-//        TreeEvolver treeEvolver = new TreeEvolver(tree);
-//        TreeSimulation simulation = new TreeSimulation(tree, treeRenderer, treeEvolver);
-//        simulation.launch(1);
-
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

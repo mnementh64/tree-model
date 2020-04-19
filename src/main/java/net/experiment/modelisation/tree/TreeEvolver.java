@@ -24,5 +24,8 @@ public class TreeEvolver {
         branch.growSection(sectionAmount);
 
         branch.streamOfBranches().forEach(this::evolve);
+        if (branch.hasExtension()) {
+            evolve(branch.getExtension());
+        }
     }
 }
