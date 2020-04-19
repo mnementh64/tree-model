@@ -22,14 +22,16 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws FileNotFoundException, JsonProcessingException {
         primaryStage.setTitle("Tree growth simulation");
         Group root = new Group();
-        Canvas canvas = new Canvas(1000, 600);
+        Canvas canvas = new Canvas(600, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         ModelLoader loader = new ModelLoader();
         Tree tree = loader.loadFromFile("/Users/sylvaincaillet/tree1.json");
 
-        TreeRenderer treeRenderer = new TreeRenderer(tree, 1000, 600);
-        treeRenderer.render(gc);
+        TreeRenderer treeRenderer = new TreeRenderer(gc, tree, 600, 600);
+        TreeEvolver treeEvolver = new TreeEvolver(tree);
+        TreeSimulation simulation = new TreeSimulation(tree, treeRenderer, treeEvolver);
+        simulation.launch(48);
 
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));

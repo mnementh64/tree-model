@@ -20,6 +20,7 @@ public class Tree {
     }
 
     public void displayPositions() {
+        System.out.println("**************************************************************");
         trunk.displayPositions(1);
     }
 

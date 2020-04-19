@@ -30,11 +30,11 @@ public class ModelExporter {
         Branch trunk = new Branch(0, vecTrunk, 8);
 
         Vector vecBranch1 = new Vector(30, 30);
-        Branch branch1 = new Branch(70, vecBranch1, 4);
+        Branch branch1 = new Branch(55, vecBranch1, 4);
         trunk.addBranch(branch1);
 
-        Vector vecSubBranch1 = new Vector(5, 10);
-        Branch subBranch1 = new Branch(60, vecSubBranch1, 2);
+        Vector vecSubBranch1 = new Vector(5, 20);
+        Branch subBranch1 = new Branch(50, vecSubBranch1, 2);
         branch1.addBranch(subBranch1);
 
         Vector vecBranch2 = new Vector(-30, 30);

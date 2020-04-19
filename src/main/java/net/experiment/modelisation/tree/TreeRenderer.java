@@ -8,17 +8,20 @@ import net.experiment.modelisation.tree.model.Tree;
 
 public class TreeRenderer {
 
+    private final GraphicsContext gc;
     private final Tree tree;
     private final int width;
     private final int height;
 
-    public TreeRenderer(Tree tree, int width, int height) {
+    public TreeRenderer(GraphicsContext gc, Tree tree, int width, int height) {
+        this.gc = gc;
         this.tree = tree;
         this.width = width;
         this.height = height;
     }
 
-    public void render(GraphicsContext gc) {
+    public void render() {
+        gc.clearRect(0, 0, width, height);
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(1);
         gc.strokeLine(width / 2, 0, width / 2, height);

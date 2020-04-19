@@ -23,6 +23,8 @@ public class Branch {
     private List<Branch> branches = new ArrayList<>();
     @JsonProperty
     private Branch extension;
+    @JsonProperty
+    private int rank = 0;
 
     /**
      * The real coordinates of the start / end points of this branch
@@ -40,6 +42,7 @@ public class Branch {
     }
 
     public void addBranch(Branch branch) {
+        branch.setRank(this.getRank() + 1);
         this.branches.add(branch);
     }
 
@@ -77,5 +80,13 @@ public class Branch {
 
     public int getSection() {
         return section;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getRank() {
+        return rank;
     }
 }
