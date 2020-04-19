@@ -18,7 +18,7 @@ public class Branch {
     @JsonProperty
     private Vector vector;
     @JsonProperty
-    private int section;
+    private double section;
     @JsonProperty
     private List<Branch> branches = new ArrayList<>();
     @JsonProperty
@@ -35,7 +35,7 @@ public class Branch {
     public Branch() {
     }
 
-    public Branch(int attachedAtPercent, Vector vector, int section) {
+    public Branch(int attachedAtPercent, Vector vector, double section) {
         this.attachedAtPercent = attachedAtPercent;
         this.vector = vector;
         this.section = section;
@@ -70,12 +70,12 @@ public class Branch {
         }
     }
 
-    public void evolve() {
-        double growthFactor = rank == 0 ? 1.3 : rank == 1 ? 1.2 : 1.3;
-        vector = vector.scale(growthFactor);
-//        int sectionFactor = rank == 0 ? 1.3 : rank == 1 ? 1.2 : 1.3;
+    public void scale(double factor) {
+        vector = vector.scale(factor);
+    }
 
-        this.streamOfBranches().forEach(Branch::evolve);
+    public void growSection(double amount) {
+        section += amount;
     }
 
     public int getAttachedAtPercent() {
@@ -86,7 +86,7 @@ public class Branch {
         return realSegment;
     }
 
-    public int getSection() {
+    public double getSection() {
         return section;
     }
 
