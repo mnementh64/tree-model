@@ -72,4 +72,12 @@ public class TreeRenderer {
             drawBranch(gc, branch.getExtension());
         }
     }
+
+    public void drawFinalText() {
+        gc.setStroke(Color.BLACK);
+        gc.setLineCap(StrokeLineCap.SQUARE);
+        gc.setLineWidth(1);
+
+        gc.strokeText("Simulation over", 20, 20);
+    }
 }

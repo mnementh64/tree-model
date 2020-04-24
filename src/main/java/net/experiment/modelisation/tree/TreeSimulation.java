@@ -25,5 +25,8 @@ public class TreeSimulation {
             // Must be called last because also
             treeEvolver.evolve();
         }
+        Platform.runLater(() -> {
+            treeRenderer.drawFinalText();
+        });
     }
 }

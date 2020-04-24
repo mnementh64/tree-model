@@ -126,7 +126,7 @@ public class Branch {
 
     public void addExtension(Branch extension) {
         // extensions must have the same rank as their reference branch
-        extension.setRank(this.getRank());
+        extension.setRank(this.getRank() + 1);
         this.extension = extension;
     }
 

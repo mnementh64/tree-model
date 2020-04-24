@@ -46,14 +46,14 @@ public class TreeEvolver {
     }
 
     private void randomGenerationOfSubBranch(Branch branch) {
-        if (branch.hasSubBranch()) {
+        if (branch.hasSubBranch() || branch.getRank() > 8) {
             return;
         }
 
         int chance = random.nextInt(10) + branch.getAge();
 
         // ok to create a sub branch
-        if (chance > 8) {
+        if (chance > 6) {
             int attachedPosition = random.nextInt(100);
 
             // branch above or below the reference one ?
@@ -69,7 +69,7 @@ public class TreeEvolver {
                 angleInDegres = 180;
             }
 
-            Vector vector = branch.getRotatedVector(angleInDegres);
+            Vector vector = branch.getNormalizedVector().rotate(angleInDegres);
 
             Branch subBranch = new Branch(attachedPosition, vector, 1);
             branch.addBranch(subBranch);
@@ -78,7 +78,7 @@ public class TreeEvolver {
 
     private void randomGenerationOfExtension(Branch branch) {
         // too young
-        if (branch.getAge() <= 3) {
+        if (branch.getAge() <= 3 || branch.getRank() > 15) {
             return;
         }
 

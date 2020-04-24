@@ -56,7 +56,7 @@ public class Main extends Application {
             TreeRenderer treeRenderer = new TreeRenderer(gc, tree, 600, 600);
             TreeEvolver treeEvolver = new TreeEvolver(tree);
             TreeSimulation simulation = new TreeSimulation(treeRenderer, treeEvolver);
-            simulation.launch(48, Duration.ofMillis(100));
+            simulation.launch(100, Duration.ofMillis(100));
             return null;
         }
     }
