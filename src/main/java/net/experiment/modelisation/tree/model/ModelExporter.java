@@ -26,24 +26,20 @@ public class ModelExporter {
     public static void main(String[] args) throws IOException {
         ModelExporter exporter = new ModelExporter();
 
-        Vector vecTrunk = new Vector(0, 40);
-        Branch trunk = new Branch(0, vecTrunk, 8);
+        Vector vecTrunk = new Vector(0, 20);
+        Branch trunk = new Branch(0, vecTrunk, 6);
 
-        Vector vecBranch1 = new Vector(30, 30);
-        Branch branch1 = new Branch(55, vecBranch1, 4);
-        trunk.addBranch(branch1);
-
-        Vector vecSubBranch1 = new Vector(5, 20);
-        Branch subBranch1 = new Branch(50, vecSubBranch1, 2);
-        branch1.addBranch(subBranch1);
-
-        Vector vecBranch2 = new Vector(-30, 30);
-        Branch branch2 = new Branch(80, vecBranch2, 3);
-        trunk.addBranch(branch2);
-
-        Vector vecTrunk2 = new Vector(3, 10);
-        Branch trunk2 = new Branch(vecTrunk2, 5);
-        trunk.addExtension(trunk2);
+//        Vector vecBranch1 = new Vector(30, 30);
+//        Branch branch1 = new Branch(55, vecBranch1, 4);
+//        trunk.addBranch(branch1);
+//
+//        Vector vecSubBranch1 = new Vector(5, 20);
+//        Branch subBranch1 = new Branch(50, vecSubBranch1, 2);
+//        branch1.addBranch(subBranch1);
+//
+//        Vector vecBranch2 = new Vector(-30, 30);
+//        Branch branch2 = new Branch(80, vecBranch2, 3);
+//        trunk.addBranch(branch2);
 
         Tree tree = new Tree(trunk);
 

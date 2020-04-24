@@ -24,32 +24,56 @@ public class TreeEvolver {
 
         // basic rule : each branch grows by 10 units
         int branchRank = branch.getRank();
-//        double growthFactor = branchRank == 0 ? 1.3 : branchRank == 1 ? 1.2 : 1.3;
-//        branch.scale(growthFactor);
         double growthAmount = 4 * Math.exp(-0.25 * branch.getAge());
         ;
         branch.addModule(growthAmount);
 
-//        double sectionAmount = branchRank == 0 ? 1 : branchRank == 1 ? 1.5 : 1.2;
-//        branch.growSection(sectionAmount);
+        double sectionAmount = Math.exp(-0.5 * branch.getAge());
+        branch.growSection(sectionAmount);
 
-//        double growthAmount = 0.0;
+        // extension management
         if (branch.hasExtension()) {
-//            // too old ? doesn't grow any more
-//            if (branch.getAge() <= 20) {
-//                // a branch with an extension grows slower
-//                growthAmount = branchRank == 0 ? 2 : 1;
-//            }
             evolve(branch.getExtension());
         } else {
-            // a branch without an extension grows faster
-//            growthAmount = branchRank == 0 ? 5 : 3;
             // random creation of an extension, based on the branch's age
             randomGenerationOfExtension(branch);
         }
-//        branch.addModule(growthAmount);
 
         branch.streamOfBranches().forEach(this::evolve);
+
+        // sub-branch management
+        randomGenerationOfSubBranch(branch);
+    }
+
+    private void randomGenerationOfSubBranch(Branch branch) {
+        if (branch.hasSubBranch()) {
+            return;
+        }
+
+        int chance = random.nextInt(10) + branch.getAge();
+
+        // ok to create a sub branch
+        if (chance > 8) {
+            int attachedPosition = random.nextInt(100);
+
+            // branch above or below the reference one ?
+            int angleModifier = random.nextInt(10) > 5 ? 1 : -1;
+
+            double branchAngle = branch.computeAngleInDegres();
+
+            // angle of the new branch : the absolute value will be +/- (15° + the random angle)
+            double angleInDegres = angleModifier * (15 + random.nextInt(15));
+            if ((branchAngle + angleInDegres) < 0) {
+                angleInDegres = 0;
+            } else if ((branchAngle + angleInDegres) > 180) {
+                angleInDegres = 180;
+            }
+
+            Vector vector = branch.getRotatedVector(angleInDegres);
+
+            Branch subBranch = new Branch(attachedPosition, vector, 1);
+            branch.addBranch(subBranch);
+        }
     }
 
     private void randomGenerationOfExtension(Branch branch) {
@@ -60,12 +84,13 @@ public class TreeEvolver {
 
         int chance = random.nextInt(10) + branch.getAge();
 
-        // of to create an extension
+        // ok to create an extension
         if (chance > 8) {
-            double deltaAngleInDegre = (random.nextDouble() - 0.5) * 5;
+            double deltaAngleInDegre = (random.nextDouble() - 0.5) * 10;
 
             Vector vector = branch.getNormalizedVector().rotate(deltaAngleInDegre);
-            Branch extension = new Branch(vector, branch.getSection() - 1);
+            double newSection = branch.getSection() - 1.4;
+            Branch extension = new Branch(vector, newSection < 0 ? 0.1 : newSection);
             branch.addExtension(extension);
         }
     }

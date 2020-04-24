@@ -33,7 +33,7 @@ public class TreeRenderer {
         // resolve the real positions of all branches of the tree - the trunk starts from the origin.
         Point origin = new Point(width / 2, height);
         tree.resolvePositions(origin);
-        tree.displayPositions();
+//        tree.displayPositions();
 
         drawBranch(gc, tree.getTrunk());
 

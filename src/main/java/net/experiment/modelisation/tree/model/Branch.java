@@ -146,4 +146,16 @@ public class Branch {
     public Vector getNormalizedVector() {
         return vector.normalized();
     }
+
+    public boolean hasSubBranch() {
+        return !branches.isEmpty();
+    }
+
+    public Vector getRotatedVector(double angleInDegres) {
+        return vector.rotate(angleInDegres);
+    }
+
+    public double computeAngleInDegres() {
+        return vector.computeAngleInDegres();
+    }
 }

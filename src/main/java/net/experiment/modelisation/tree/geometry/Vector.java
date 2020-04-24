@@ -33,7 +33,7 @@ public class Vector {
         double oldModule = this.module();
         double newModule = oldModule + amount;
         Vector vector = new Vector(this.x * newModule / oldModule, this.y * newModule / oldModule);
-        System.out.println("Module : " + oldModule + " add " + amount + " --> " + vector.module());
+//        System.out.println("Module : " + oldModule + " add " + amount + " --> " + vector.module());
         return vector;
     }
 
@@ -47,5 +47,9 @@ public class Vector {
         double newX = this.x * Math.cos(angleInRadians) - this.y * Math.sin(angleInRadians);
         double newY = this.x * Math.sin(angleInRadians) + this.y * Math.cos(angleInRadians);
         return new Vector(newX, newY);
+    }
+
+    public double computeAngleInDegres() {
+        return x != 0 ? Math.toDegrees(Math.atan(y / x)) : 90.0;
     }
 }
