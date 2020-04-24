@@ -60,6 +60,7 @@ public class TreeRenderer {
     }
 
     private void drawBranch(GraphicsContext gc, Branch branch) {
+        gc.setStroke(branch.getRank() % 2 == 0 ? Color.BROWN : Color.RED);
         gc.setLineCap(StrokeLineCap.ROUND);
         gc.setLineWidth(branch.getSection());
         Point a = branch.getRealSegment().a;
@@ -71,29 +72,4 @@ public class TreeRenderer {
             drawBranch(gc, branch.getExtension());
         }
     }
-
-    /**
-     * D-P-C
-     * |   |
-     * |   |
-     * .....
-     * |   |
-     * |   |
-     * A-O-B
-     */
-//    private void drawFrom(GraphicsContext gc, Segment segment, Point origin, double orientation) {
-//        float[] transformedVertices = GeometryUtils.rotateSegment(segment, origin, orientation);
-//
-//        double[] transformedX = new double[transformedVertices.length / 2];
-//        double[] transformedY = new double[transformedVertices.length / 2];
-//        for (int i = 0; i < transformedVertices.length; i += 2) {
-//            transformedX[i / 2] = transformedVertices[i];
-//            transformedY[i / 2] = transformedVertices[i + 1] - segment.getLength();
-//        }
-//        gc.fillPolygon(transformedX, transformedY, 4);
-//
-////        segment.streamOfBranches().forEach(branch -> {
-////            Point positionOnSegment = GeometryUtils.computePositionObranch.getPositionOnSegment()
-////        });
-//    }
 }

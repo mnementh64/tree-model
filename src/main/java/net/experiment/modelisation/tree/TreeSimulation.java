@@ -3,6 +3,8 @@ package net.experiment.modelisation.tree;
 import javafx.application.Platform;
 import net.experiment.modelisation.tree.model.Tree;
 
+import java.time.Duration;
+
 public class TreeSimulation {
     private final Tree tree;
     private final TreeRenderer treeRenderer;
@@ -14,8 +16,8 @@ public class TreeSimulation {
         this.treeEvolver = treeEvolver;
     }
 
-    public void launch(int nbMonths) {
-        for (int i = 0; i < nbMonths; i++) {
+    public void launch(int timeUnits, Duration pause) {
+        for (int i = 0; i < timeUnits; i++) {
             // must be called first to compute real positions
             Platform.runLater(
                     () -> {
@@ -23,7 +25,7 @@ public class TreeSimulation {
                     }
             );
             try {
-                Thread.sleep(1000);
+                Thread.sleep(pause.toMillis());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

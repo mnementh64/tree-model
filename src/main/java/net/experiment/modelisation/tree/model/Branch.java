@@ -27,6 +27,8 @@ public class Branch {
     private Branch extension;
     @JsonProperty
     private int rank = 0;
+    @JsonProperty
+    private int age = 0;
 
     /**
      * The real coordinates of the start / end points of this branch
@@ -51,6 +53,10 @@ public class Branch {
     public void addBranch(Branch branch) {
         branch.setRank(this.getRank() + 1);
         this.branches.add(branch);
+    }
+
+    public void setOlder() {
+        age++;
     }
 
     public Stream<Branch> streamOfBranches() {
@@ -90,6 +96,10 @@ public class Branch {
         vector = vector.scale(factor);
     }
 
+    public void addModule(double amount) {
+        vector = vector.addModule(amount);
+    }
+
     public void growSection(double amount) {
         section += amount;
     }
@@ -126,5 +136,14 @@ public class Branch {
 
     public boolean hasExtension() {
         return extension != null;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @JsonIgnore
+    public Vector getNormalizedVector() {
+        return vector.normalized();
     }
 }

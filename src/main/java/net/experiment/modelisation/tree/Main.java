@@ -2,7 +2,6 @@ package net.experiment.modelisation.tree;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,6 +12,7 @@ import net.experiment.modelisation.tree.model.ModelLoader;
 import net.experiment.modelisation.tree.model.Tree;
 
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
 public class Main extends Application {
 
@@ -56,7 +56,7 @@ public class Main extends Application {
             TreeRenderer treeRenderer = new TreeRenderer(gc, tree, 600, 600);
             TreeEvolver treeEvolver = new TreeEvolver(tree);
             TreeSimulation simulation = new TreeSimulation(tree, treeRenderer, treeEvolver);
-            simulation.launch(10);
+            simulation.launch(100, Duration.ofMillis(100));
             return null;
         }
     }
